@@ -1,0 +1,50 @@
+{% load static humanize %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC 빌더</title>
+    <link rel="stylesheet" href="{% static 'pc_builder/css/builder.css' %}">
+    
+</head>
+<body>
+    <div class="pc-builder-container">
+        <h3>🖥️ 마우스, 모니터, 키보드 선택하기</h3>
+        <h2><a href="{% url 'mouse_list'%}" class="nav-link logout">상품 둘러보기</a></h2>
+        <div class="pc-builder-background">
+            <img id="monitor-image" src="{% static 'pc_builder/images/transparent_monitor.png' %}" alt="모니터" class="part-image">
+            <img id="mouse-image" src="{% static 'pc_builder/images/transparent_mouse.png' %}" alt="마우스" class="part-image">
+            <img id="keyboard-image" src="{% static 'pc_builder/images/transparent_keyboard.png' %}" alt="키보드" class="part-image">
+        </div>
+
+        <div class="product-selector">
+            <select id="monitor-select" onchange="updatePart('monitor')">
+                <option value="0" data-image="{% static 'pc_builder/images/transparent_monitor.png' %}">모니터 선택</option>
+                {% for monitor in monitors %}
+                    <option value="{{ monitor.price }}" data-image="{{ monitor.image_url }}">{{ monitor.title }}</option>
+                {% endfor %}
+            </select>
+    
+            <select id="mouse-select" onchange="updatePart('mouse')">
+                <option value="0" data-image="{% static 'pc_builder/images/transparent_mouse.png' %}">마우스 선택</option>
+                {% for mouse in mouses %}
+                    <option value="{{ mouse.price }}" data-image="{{ mouse.image_url }}">{{ mouse.title }}</option>
+                {% endfor %}
+            </select>
+    
+            <select id="keyboard-select" onchange="updatePart('keyboard')">
+                <option value="0" data-image="{% static 'pc_builder/images/transparent_keyboard.png' %}">키보드 선택</option>
+                {% for keyboard in keyboards %}
+                    <option value="{{ keyboard.price }}" data-image="{{ keyboard.image_url }}">{{ keyboard.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    
+        <div class="total-price-container">
+            <h3 id="total-price">총 가격: 0 원</h3>
+        </div>
+    </div>
+    <script src="{% static 'pc_builder/js/builder.js' %}"></script>
+</body>
+</html>

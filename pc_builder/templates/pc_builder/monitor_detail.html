@@ -1,0 +1,24 @@
+{% load static humanize %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ monitors.title }}</title>
+    <link rel="stylesheet" href="{% static 'pc_builder/css/component.css' %}">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="mouse-image">
+            <img src="{{ monitors.image_url }}" alt="{{ monitors.title }}">
+        </div>
+        <h1 class="mouse-title">{{ monitors.title }}</h1>
+        <p class="mouse-price">{{ monitors.price|intcomma }}원</p>
+        <p class="mouse-info">브랜드: {{ monitors.brand }}</p>
+        <p class="mouse-info">판매처: {{ monitors.mall_name }}</p>
+        <a href="{{ monitors.link }}" class="button" target="_blank">구매하기</a>
+        <a href="{% url 'monitor_list' %}" class="button" onclick="window.history.back(); return false;">목록으로</a>
+    </div>
+</body>
+</html>

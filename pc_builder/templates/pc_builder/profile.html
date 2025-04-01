@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile_user.username }}님의 프로필</title>
+    <link rel="stylesheet" href="{% static 'pc_builder/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            {% if user.is_authenticated %}
+                <a href="{% url 'account_logout' %}" class="nav-link logout">로그아웃</a>
+                <a href="{% url 'account_change_password' %}" class="nav-link logout">비밀번호 변경</a>
+                <a href="{% url 'index' %}" class="nav-link logout">홈 화면</a>
+                {% if profile_user == user %}
+                    <a href="{% url 'profile_set' %}" class="nav-link logout">프로필 수정</a>
+                {% endif %}
+            
+            {% else %}
+                <a href="{% url 'account_login' %}" class="nav-link login">로그인</a>
+                <a href="{% url 'account_signup' %}" class="nav-link signup">회원가입</a>
+                <a href="{% url 'index' %}" class="nav-link logout">홈 화면</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <h2>{{ profile_user.nickname }} 님의 프로필</h2>
+            <div class="profile-pic" style="background-image: url('{{ profile_user.profile_pic.url }}');"></div>
+            
+            <p>가입 날짜: {{ profile_user.date_joined|date:"Y년 m월 d일" }}</p>
+
+            <!-- 팔로워 & 팔로잉 정보 -->
+            <div class="profile-stats">
+                <a href="{% url 'follower_list' profile_user.id%}" class="stats-link">
+                    팔로워 <span class="stats-count">{{ profile_user.followers.count }}</span>
+                </a>
+                <span class="divider">|</span>
+                <a href="{% url 'following_list' profile_user.id%}" class="stats-link">
+                    팔로잉 <span class="stats-count">{{ profile_user.following.count }}</span>
+                </a>
+            </div>
+
+            <!-- 팔로우 버튼 -->
+            {% if user.is_authenticated and user != profile_user %}
+            <form action="{% url 'process_follow' profile_user.id %}" method="post" class="follow-form">
+                {% csrf_token %}
+                <button type="submit" class="follow-button">
+                    {% if is_following %}
+                        언팔로우
+                    {% else %}
+                        팔로우
+                    {% endif %}
+                </button>
+            </form>
+            {% endif %}
+        </div>
+
+        <div class="profile-posts">
+            <h3>최근 자유게시글</h3>
+            {% if user_posts %}
+                <ul>
+                    {% for post in user_posts %}
+                        <li>
+                            <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
+                            <span class="date">{{ post.dt_created|date:"Y-m-d H:i" }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>게시글이 없습니다.</p>
+            {% endif %}
+        </div>
+        <div class="button-group">
+            <a href="{% url 'user_post_list' profile_user.id%}"><button class="button">모든 글보기</button></a>
+        </div>
+
+        <div class="profile-posts">
+            <h3>최근 상품의견글</h3>
+            {% if user_pcparts %}
+                <ul>
+                    {% for pc_part in user_pcparts %}
+                        <li>
+                            <a href="{% url 'pc_part_detail' pc_part.id %}">{{ pc_part.title }}</a>
+                            <span class="date">{{ pc_part.dt_created|date:"Y-m-d H:i" }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>게시글이 없습니다.</p>
+            {% endif %}
+        </div>
+
+        <div class="button-group">
+            <a href="{% url 'user_pc_part_list' profile_user.id%}"><button class="button">모든 글보기</button></a>
+        </div>
+    </div>
+
+</body>
+</html>

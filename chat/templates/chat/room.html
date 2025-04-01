@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="{% static 'chat/css/room.css' %}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            채팅방: <span id="chat-room-name"></span>
+        </div>
+        <div id="chat-log"></div>
+        <div class="chat-input-container">
+            <input id="chat-message-input" type="text" placeholder="메시지를 입력하세요">
+            <button id="chat-message-submit">전송</button>
+        </div>
+    </div>
+
+    {{ room_name|json_script:"room-name" }}
+    {{ request.user.username|json_script:"user-username" }}
+
+    <script>
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+        const userName = JSON.parse(document.getElementById('user-username').textContent);
+
+        document.getElementById('chat-room-name').textContent = roomName; // 채팅방 이름 표시
+
+        const chatSocket = new WebSocket(
+            'ws://' + window.location.host + '/ws/chat/' + roomName + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            const chatLog = document.querySelector('#chat-log');
+
+            console.log('Received data:', data);
+
+            const messageElement = document.createElement('div');
+
+            // 입장 메시지 처리 (is_welcome이 true인 경우)
+            if (data.is_welcome || data.is_leave) {
+                messageElement.textContent = data.message;
+                messageElement.classList.add('welcome-message'); // 입장 메시지 스타일
+            } else {
+                // 일반 메시지 처리
+                messageElement.textContent = `${data.username}: ${data.message}`;
+                messageElement.classList.add('message');
+
+                if (data.username === userName) {
+                    messageElement.classList.add('my-message');
+                } else {
+                    messageElement.classList.add('other-message');
+                }
+            }
+
+            
+
+            chatLog.appendChild(messageElement);
+            chatLog.scrollTop = chatLog.scrollHeight;
+            
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            console.log('Sending message:', message, 'with username:', userName);  // 확인용 로그 추가
+            chatSocket.send(JSON.stringify({
+                'message': message,
+                'username': userName
+            }));
+            messageInputDom.value = '';
+        };
+    </script>
+</body>
+</html>

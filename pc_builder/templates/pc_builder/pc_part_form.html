@@ -1,0 +1,72 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 작성</title>
+    <link rel="stylesheet" href="{% static 'pc_builder/css/style.css' %}">
+</head>
+<body>
+
+    <nav>
+        <a href="{% url 'pc_part_list' %}" class="button">목록으로</a>
+    </nav>
+
+    <div class="container">
+        <div class="post-box">
+            <h1 class="title">
+                {% if form.instance.pk %}
+                    게시글 수정
+                {% else %}
+                    게시글 작성
+                {% endif %}
+            </h1>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label>분야 선택</label>
+                    {{ form.category|add_class:"form-control" }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.title.id_for_label }}">제목</label>
+                    {{ form.title|add_class:"form-control" }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.image1.id_for_label }}">이미지 1</label>
+                    {{ form.image1|add_class:"form-control-file" }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.image2.id_for_label }}">이미지 2</label>
+                    {{ form.image2|add_class:"form-control-file" }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.image3.id_for_label }}">이미지 3</label>
+                    {{ form.image3|add_class:"form-control-file" }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.content.id_for_label }}">내용</label>
+                    {{ form.content|add_class:"form-control text-area" }}
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="button submit-button">저장</button>
+                    <a href="{% url 'pc_part_list' %}" class="button cancel-button">취소</a>
+                    
+                </div>
+                
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

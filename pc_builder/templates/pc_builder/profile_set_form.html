@@ -1,0 +1,62 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필 수정</title>
+    <link rel="stylesheet" href="{% static 'pc_builder/css/style.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'index' %}" class="button">돌아가기</a>
+    </nav>
+
+    <div class="container">
+        <div class="post-box">
+            <h1 class="title">
+                {% if form.instance.pk %}
+                    프로필 수정<br>
+                    어서오세요! 프로필 설정을 해주세요!
+                {% else %}
+                    게시글 작성
+                {% endif %}
+            </h1>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.nickname.id_for_label }}">닉네임</label>
+                    {{ form.nickname|add_class:"form-control" }}
+                </div>
+
+                <div class="form-group">
+                    {% comment %} {% if post.image1%}
+                        <img src="{{post.image1.url}}">
+                    {%endif%} {% endcomment %}
+                    <label for="{{ form.profile_pic.id_for_label }}">프로필 이미지</label>
+                    {{ form.profile_pic|add_class:"form-control-file" }}
+                </div>
+
+
+                <div class="form-group">
+                    <label for="{{ form.intro.id_for_label }}">자기소개</label>
+                    {{ form.intro|add_class:"form-control text-area" }}
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="button submit-button">저장</button>
+                    <a href="{% if form.instance.pk %}
+                                {% url 'index' %}
+                            {% else %}
+                                {% url 'index' %}
+                            {% endif %}"class="button cancel-button">취소</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

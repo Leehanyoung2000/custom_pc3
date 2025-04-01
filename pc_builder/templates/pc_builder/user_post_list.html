@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 목록</title>
+    <link rel="stylesheet" href="{% static 'pc_builder/css/style.css' %}">
+</head>
+<body>
+
+    <nav>
+        {% if user.is_authenticated %}
+            <a href="{% url 'account_logout' %}" class="nav-link logout">로그아웃</a>
+            <a href="{% url 'account_change_password' %}" class="nav-link logout">비밀번호 변경</a>
+            <a href="{% url 'profile' profile_user.id%}" class="nav-link logout">돌아가기</a>
+        {% else %}
+            <a href="{% url 'account_login' %}" class="nav-link login">로그인</a>
+            <a href="{% url 'account_signup' %}" class="nav-link signup">회원가입</a>
+        {% endif %}
+    </nav>
+
+    <div class="container">
+        
+        <h1 class="title">{{profile_user.nickname}} 님의 자유글 목록 ({{paginator.count}})</h1>
+
+        
+
+        <div class="post-list">
+            {% for post in user_posts %}
+                <div class="post-item">
+                    <div class="post-thumbnail">
+                        {% if post.image1 %}
+                            <img src="{{ post.image1.url }}" alt="Thumbnail" class="thumbnail-image">
+                        {% else %}
+                            <img src="{% static 'pc_builder/images/default-thumbnail.jpg' %}" alt="Default Thumbnail" class="thumbnail-image">
+                        {% endif %}
+                    </div>
+                    <h2 class="post-title">{{ post.title }}</h2>
+                    
+                    <p class="post-date">{{ post.dt_created|date:"Y-m-d H:i" }}</p>
+                    <div class="button-group">
+                        <a href="{% url 'post_detail' post.id %}" class="button">자세히 보기</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if is_paginated %}
+            <footer>
+                {% include 'components/pagination.html' with page_obj=page_obj %}
+            </footer>
+        {% endif%}
+        
+    </div>
+
+</body>
+</html>

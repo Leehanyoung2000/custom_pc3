@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 삭제</title>
+    <link rel="stylesheet" href="{% static 'pc_builder/css/style.css' %}">
+</head>
+<body>
+
+    <nav>
+        <a href="{% url 'pc_part_list' %}" class="button">목록으로</a>
+    </nav>
+
+    <div class="container">
+        <div class="post-box">
+            <h1 class="title">게시글 삭제</h1>
+            <p class="warning-text">정말로 이 게시글을 삭제하시겠습니까?</p>
+
+            <div class="post-content">
+                <h2>{{ pc_part.title }}</h2>
+                <p>{{ pc_part.content }}</p>
+                {% if pc_part.image1 %}
+                    <img src="{{ pc_part.image1.url }}" alt="게시글 이미지">
+                {% endif %}
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="button-group">
+                    <button type="submit" class="button delete-button">삭제</button>
+                    <a href="{% url 'pc_part_detail' pc_part.id %}" class="button cancel-button">취소</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

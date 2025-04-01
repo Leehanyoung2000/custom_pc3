@@ -1,0 +1,23 @@
+{% load static humanize %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ keyboards.title }}</title>
+    <link rel="stylesheet" href="{% static 'pc_builder/css/component.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="mouse-image">
+            <img src="{{ keyboards.image_url }}" alt="{{ keyboards.title }}">
+        </div>
+        <h1 class="mouse-title">{{ keyboards.title }}</h1>
+        <p class="mouse-price">{{ keyboards.price|intcomma }}원</p>
+        <p class="mouse-info">브랜드: {{ keyboards.brand }}</p>
+        <p class="mouse-info">판매처: {{ keyboards.mall_name }}</p>
+        <a href="{{ keyboards.link }}" class="button" target="_blank">구매하기</a>
+        <a href="{% url 'keyboard_list' %}" class="button" onclick="window.history.back(); return false;">목록으로</a>
+    </div>
+</body>
+</html>

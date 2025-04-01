@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pc_part_list_detail.title }}</title>
+    <link rel="stylesheet" href="{% static 'pc_builder/css/style.css' %}">
+</head>
+<body>
+
+    <nav>
+        <a href="{% url 'pc_part_list' %}" class="button">목록으로</a>
+    </nav>
+
+    <div class="container">
+        <div class="post-box">
+            <div class="post-header">
+                <h1 class="title">{{ pc_part_list_detail.title }}</h1>
+                <div class="meta-info">
+                    
+                    <a href="{% url 'profile' pc_part_list_detail.author.id %}" class="author">{{ pc_part_list_detail.author.nickname }}</a> |
+                    <span class="date">{{ pc_part_list_detail.category }}</span> |
+                    <span class="date">{{ pc_part_list_detail.dt_created|date:"Y-m-d H:i" }}</span>
+                </div>
+            </div>
+
+            {% if pc_part_list_detail.image1 %}
+                <div class="post-thumbnail">
+                    <img src="{{ pc_part_list_detail.image1.url }}" alt="Post Image">
+                </div>
+            {% endif %}
+
+            {% if pc_part_list_detail.image2 %}
+                <div class="post-thumbnail">
+                    <img src="{{ pc_part_list_detail.image2.url }}" alt="Post Image">
+                </div>
+            {% endif %}
+
+            {% if pc_part_list_detail.image3 %}
+                <div class="post-thumbnail">
+                    <img src="{{ pc_part_list_detail.image3.url }}" alt="Post Image">
+                </div>
+            {% endif %}
+
+            <div class="post-content">
+                <p>{{ pc_part_list_detail.content|linebreaksbr }}</p>
+            </div>
+
+            <div class="button-group">
+                <a href="{% url 'pc_part_list' %}" class="button">목록으로</a>
+                {%if pc_part_list_detail.author == user %}
+                    <a href="{% url 'pc_part_edit' pc_part_list_detail.id %}" class="button">수정하기</a>
+                    <a href="{% url 'pc_part_delete' pc_part_list_detail.id%}" class="button">삭제하기</a>
+                {%endif%}
+            </div>
+
+        
+        </div>
+    </div>
+
+</body>
+</html>

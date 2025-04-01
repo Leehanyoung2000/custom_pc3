@@ -1,0 +1,76 @@
+{% load static humanize %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모니터 목록</title>
+    <link rel="stylesheet" href="{% static 'pc_builder/css/style.css' %}">
+</head>
+<body>
+
+    <nav>
+        {% if user.is_authenticated %}
+            <a href="{% url 'account_logout' %}" class="nav-link logout">로그아웃</a>
+            <a href="{% url 'account_change_password' %}" class="nav-link logout">비밀번호 변경</a>
+            <a href="{% url 'index' %}" class="nav-link logout">홈 화면</a>
+        {% else %}
+            <a href="{% url 'account_login' %}" class="nav-link login">로그인</a>
+            <a href="{% url 'account_signup' %}" class="nav-link signup">회원가입</a>
+            <a href="{% url 'index' %}" class="nav-link logout">홈 화면</a>
+        {% endif %}
+    </nav>
+
+    <div class="container">
+        <h1 class="title">모니터 목록</h1>
+        <a href="{%url 'mouse_list'%}" class="button">마우스</a>
+        ------
+        <a href="{%url 'keyboard_list'%}" class="button">키보드</a>
+        
+        <!-- 검색 폼 추가 -->
+        <form method="GET" action="{% url 'search' %}" class="search-form">
+            <input type="text" name="query" placeholder="검색어를 입력하세요" value="{{ query }}">
+            <button type="submit">검색</button>
+        </form>
+
+        <div class="mouse-list">
+            {% for monitor in  monitors %}
+                <div class="mouse-item">
+                    <div class="mouse-thumbnail">
+                        <img src="{{ monitor.image_url }}" alt="Mouse Image" class="thumbnail-image">
+                    </div>
+                    <h2 class="mouse-title">{{ monitor.title }}</h2>
+                    <p class="mouse-price">{{ monitor.price|intcomma }}원</p>
+                    <p class="mouse-brand">브랜드: {{ monitor.brand }}</p>
+                    <p class="mouse-mall-name">판매처: {{ monitor.mall_name }}</p>
+                    <div class="button-group">
+                        <a href="{{ monitor.link }}" class="button" target="_blank">구매하기</a>
+                        <a href="{% url 'monitor_detail' monitor.id%}" class="button" >자세히</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            {% if prev_page and prev_page != 'http://127.0.0.1:8000/monitor' %}
+                <a href="?page={{ prev_page }}" class="button">이전 페이지</a>
+            {% endif%}
+
+            {% if prev_page == 'http://127.0.0.1:8000/monitor'%}
+                <a href="{% url 'monitor_list'%}" class="button">이전 페이지 (특정 처리)</a>
+            {% endif%}
+            {% if next_page %}
+                <a href="?page={{ next_page }}" class="button">다음 페이지</a>
+            {% endif %}
+            
+
+            {% comment %} {% if prev_page == 2" %}
+                <!-- prev_page가 '2'일 경우 특정 처리 -->
+                <a href="{% url 'monitor_list'%}" class="button">이전 페이지 (특정 처리)</a>
+            {% endif %} {% endcomment %}
+            
+        </div>
+        
+    </div>
+
+</body>
+</html>

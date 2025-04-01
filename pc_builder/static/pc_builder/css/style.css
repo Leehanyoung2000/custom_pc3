@@ -1,0 +1,657 @@
+/* 공통 스타일 */
+.button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #2563eb;
+}
+
+.button-group {
+    display: flex;
+    gap: 1.5rem;
+}
+
+/* 게시판 목록 스타일 */
+.pc-parts-board {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.pc-parts-board .post-item {
+    display: flex;
+    justify-content: center;
+}
+
+.pc-parts-board .post-box {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pc-parts-board .post-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pc-parts-board .post-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.pc-parts-board .post-summary {
+    font-size: 1rem;
+    color: #4b5563;
+    margin-bottom: 1rem;
+}
+
+.pc-parts-board .post-date {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    margin-bottom: 1rem;
+}
+
+/* 썸네일 스타일 */
+.thumbnail-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pc-parts-board .post-thumbnail,
+.pc-parts-board .pc-part-thumbnail {
+    width: 100%;
+    max-width: 200px;
+    margin-bottom: 1rem;
+}
+
+/* 게시글 목록 스타일 */
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.post-list .post-item {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.post-list .post-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.post-list .post-item .post-thumbnail {
+    max-width: 150px;
+}
+
+.post-list .post-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #1f2937;
+}
+
+.post-list .post-summary {
+    font-size: 1rem;
+    color: #4b5563;
+    margin-bottom: 0.75rem;
+}
+
+.post-list .post-date {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+/* 네비게이션 스타일 */
+nav {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nav-link.logout {
+    background-color: #ef4444;
+}
+
+.nav-link.logout:hover {
+    background-color: #dc2626;
+}
+
+.nav-link.login {
+    background-color: #3b82f6;
+}
+
+.nav-link.login:hover {
+    background-color: #2563eb;
+}
+
+.nav-link.signup {
+    background-color: #10b981;
+    margin-left: 0.5rem;
+}
+
+.nav-link.signup:hover {
+    background-color: #059669;
+}
+
+/* 게시글 상세 페이지 */
+.post-box {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 2rem auto;
+}
+
+.post-header {
+    border-bottom: 2px solid #e5e7eb;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.post-header .title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1f2937;
+}
+
+.meta-info {
+    font-size: 1rem;
+    color: #6b7280;
+    display: flex;
+    gap: 1rem;
+}
+
+.meta-info .author {
+    font-weight: bold;
+    color: #3b82f6;
+}
+
+.meta-info .date {
+    color: #9ca3af;
+}
+
+.post-thumbnail {
+    max-width: 800px;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.post-thumbnail img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-content {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: #4b5563;
+    margin-bottom: 2rem;
+}
+
+/* 폼 관련 스타일 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.text-area {
+    height: 150px;
+    resize: vertical;
+}
+
+.form-control-file {
+    border: none;
+}
+
+/* 페이지네이션 *//* .container를 중앙 정렬 */
+/* .container를 중앙 정렬 */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* 텍스트 중앙 정렬 */
+    min-height: 100vh; /* 화면 높이에 맞게 중앙 배치 */
+    padding: 20px;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 10px 0;
+    gap: 8px;
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+.pagination li a,
+.pagination li.current {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.pagination li a {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.pagination li a:hover {
+    background-color: #ddd;
+}
+
+.pagination li.current {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* 경고 텍스트 */
+.warning-text {
+    color: #d9534f;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.delete-button {
+    background-color: #d9534f;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c9302c;
+}
+
+/* # profile */
+
+.profile-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.profile-posts ul {
+    list-style: none;
+    padding: 0;
+}
+.profile-posts li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.profile-posts li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+}
+.date {
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* 프로필 사진 동그랗게 만들기 */
+.profile-pic {
+    width: 150px; /* 원하시는 크기로 설정 */
+    height: 150px; /* 원하시는 크기로 설정 */
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%; /* 동그란 모양을 만듦 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
+/* 댓글 작성자의 프로필 사진과 이름을 가로로 배치 */
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-header .author {
+    display: flex;
+    align-items: center;
+}
+
+.comment-header .profile-pic {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.comment-header .author span {
+    font-weight: bold;
+}
+.comment-header .author a {
+    text-decoration: none;
+    color: inherit;  /* 링크 색상을 일반 텍스트와 동일하게 */
+}
+
+/* 댓글 내용과 좋아요 버튼을 가로로 배치 */
+.comment-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.comment-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+    color: #666;
+}
+/* 아이콘 */
+.like-button svg, .comment-info svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    stroke: #ff4d4d; /* ❤️ 빨간색 하트 */
+}
+
+.comment-info svg {
+    stroke: #4d4dff; /* 💬 파란색 댓글 아이콘 */
+}
+
+
+/* 댓글 작성 폼 */
+.comment-form {
+    margin-top: 20px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 1em;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.comment-form .button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-stats {
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.stats-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.stats-count {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.divider {
+    margin: 0 8px;
+    color: #999;
+}
+
+.follow-form {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.follow-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.follow-button:hover {
+    background-color: #0056b3;
+}
+
+.list-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.user-list {
+    list-style: none;
+    padding: 0;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.username:hover {
+    color: #007bff;
+}
+
+.no-result {
+    font-size: 14px;
+    color: #999;
+    margin-top: 20px;
+}
+
+/* 검색 폼 스타일 */
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.search-form input {
+    width: 60%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.search-form button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+/* mouse_list.html에 적용할 스타일 */
+
+/* .mouse-list는 마우스 항목들을 감싸는 컨테이너 */
+.mouse-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개씩 표시 */
+    gap: 20px; /* 항목 간 간격 */
+    margin-top: 20px;
+}
+
+/* 각 마우스 항목에 대한 스타일 */
+.mouse-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.mouse-thumbnail {
+    width: 425px; /* 원하는 고정 크기 */
+    height: 400px; /* 원하는 고정 크기 */
+    overflow: hidden; /* 넘치는 부분 잘라내기 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mouse-thumbnail img {
+    width: 100%;  /* 가로를 부모 요소에 맞춤 */
+    height: 100%; /* 세로를 부모 요소에 맞춤 */
+    object-fit: cover; /* 이미지 비율 유지하며 넘치는 부분 자름 */
+    border-radius: 8px;
+}
+
+
+
+/* 제목, 가격, 브랜드 등의 텍스트 스타일 */
+.mouse-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.mouse-price {
+    font-size: 14px;
+    color: #333;
+}
+
+.mouse-brand, .mouse-mall-name {
+    font-size: 12px;
+    color: #777;
+}
+
+.button-group .button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.button-group .button:hover {
+    background-color: #0056b3;
+}
+/* 버튼 그룹 스타일 */
+.button-group {
+    text-align: center; /* 버튼을 가운데 정렬 */
+}
+
+/* 버튼 스타일 */
+.button-group .button {
+    display: inline-block; /* 기본적으로 inline-block으로 처리되어야 하므로 그대로 유지 */
+    margin: 0 auto; /* 부모 요소 내에서 가운데 정렬 */
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.button-group .button:hover {
+    background-color: #0056b3;
+}

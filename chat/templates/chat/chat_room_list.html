@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Rooms</title>
+    <link rel="stylesheet" href="{% static 'chat/css/chat.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- 채팅방을 감싸는 박스 -->
+        <div class="chat-room-box">
+            <h1>채팅방 목록</h1>
+            <div class="chat-room-list">
+                {% for room in chat_rooms %}
+                    <div class="chat-room-item">
+                        <a href="{% url 'room' room.name %}">{{ room.name }}</a>
+                        <!-- 참여 인원수 표시 -->
+                        
+                    </div>
+                {% empty %}
+                    <div class="no-rooms">현재 채팅방이 없습니다.</div>
+                {% endfor %}
+            </div>
+            <!-- 새 채팅방 만들기 버튼 -->
+            <a href="{% url 'chat_room_create' %}" class="create-room-btn">새 채팅방 만들기</a>
+        </div>
+    </div>
+</body>
+</html>

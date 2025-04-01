@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC 부품 사이트</title>
+    <link rel="stylesheet" href="{% static 'pc_builder/css/style.css' %}">
+</head>
+<body>
+
+    <nav>
+        {% if user.is_authenticated %}
+            <a href="{% url 'account_logout' %}" class="nav-link logout">로그아웃</a>
+            <a href="{% url 'account_change_password' %}" class="nav-link logout">비밀번호 변경</a>
+            <a href="{% url 'profile' user.id%}" class="nav-link logout">내 프로필</a>
+        {% else %}
+            <a href="{% url 'account_login' %}" class="nav-link login">로그인</a>
+            <a href="{% url 'account_signup' %}" class="nav-link signup">회원가입</a>
+        {% endif %}
+    </nav>
+
+    <div class="container">
+        <h1 class="title">개인 컴퓨터 부품 사이트</h1>
+
+        {% if user.is_authenticated %}
+            <p class="welcome-box">어서오세요, {{ user }}님!</p>
+            <div class="button-group">
+                <a href="{% url 'post_list'%}" class="button">자유게시판</a>
+                <a href="{% url 'pc_part_list'%}" class="button">상품의견게시판</a>
+                <a href="{% url 'mouse_list' %}" class="button">부품 둘러보기</a>
+                <a href="{% url 'builder'%}" class="button">부품 견적 짜보기</a>
+                <a href="{% url 'chat_room_list'%}" class="button">오픈채팅</a>
+
+                
+            </div>
+        {% else %}
+            <div class="welcome-box">어서오세요! 처음이신가요?</div>
+            <div class="button-group">
+                <a href="{% url 'account_login' %}" class="button">로그인하기</a>
+                <a href="{% url 'account_signup' %}" class="button">회원가입하기</a>
+                <a href="{% url 'post_list'%}" class="button">자유게시판</a>
+
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

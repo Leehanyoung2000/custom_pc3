@@ -1,0 +1,23 @@
+{% load static humanize %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ mouse.title }}</title>
+    <link rel="stylesheet" href="{% static 'pc_builder/css/component.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="mouse-image">
+            <img src="{{ mouse.image_url }}" alt="{{ mouse.title }}">
+        </div>
+        <h1 class="mouse-title">{{ mouse.title }}</h1>
+        <p class="mouse-price">{{ mouse.price|intcomma }}원</p>
+        <p class="mouse-info">브랜드: {{ mouse.brand }}</p>
+        <p class="mouse-info">판매처: {{ mouse.mall_name }}</p>
+        <a href="{{ mouse.link }}" class="button" target="_blank">구매하기</a>
+        <a href="{% url 'mouse_list' %}" class="button" onclick="window.history.back(); return false;">목록으로</a>
+    </div>
+</body>
+</html>
